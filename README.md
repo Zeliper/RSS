@@ -1,7 +1,7 @@
 # RSS
 
-![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/Zeliper/RSS/1?style=flat-square)
+![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/Zeliper/RSS/1)
 
 
 
-[MM]:
+[MM]:![GitHub milestone]
