@@ -7,7 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="#FFBB4444">
     <Grid>
-        <WebBrowser x:Name="Browser"/>
-        
+        <Grid.RowDefinitions>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <WebBrowser x:Name="Browser" Grid.Column="1"/>
+        <ListBox x:Name="List" SelectionChanged="List_SelectionChanged" MouseRightButtonUp="List_MouseRightButtonUp" >
+            
+        </ListBox>
     </Grid>
 </Window>

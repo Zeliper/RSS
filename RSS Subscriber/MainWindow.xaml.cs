@@ -19,6 +19,7 @@ using System.Text.Encodings.Web;
 using System.Windows.Markup;
 using CefSharp;
 using System.IO;
+using System.Diagnostics;
 
 namespace RSS_Subscriber
 {
@@ -26,50 +27,28 @@ namespace RSS_Subscriber
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
-        public void RSS()
-        {
-            SyndicationFeed feed = null;
-            try
-            {
-                using(var reader = XmlReader.Create("https://dragonkid.net/bbs/rss.php?bo_table=t1"))
-                {
-                    feed = SyndicationFeed.Load(reader);
-                }
-            }
-            catch { }
-
-            if (feed != null)
-            {
-                foreach(var element in feed.Items)
-                {
-                   
-                }
-                Browser.NavigateToString(CreateContent(feed.Items.ToArray()[7].Summary.Text));
-            }
-        }
-
-        public string CreateContent(string _text)
-        {
-            string css = File.ReadAllText("WebStyle.css");
-            string inst = 
-                "<html lang=\"ko\"" +
-                    "<HEAD>" +
-                        "<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'>" +
-                        "<style type=\"text/css\">" +
-                        css +
-                        "</style>" +
-                    "</HEAD>" +
-                    "<body>" +
-                    _text +
-                    "</BODY>" +
-                "</html>";
-            return inst;
-        }
+    {//"https://dragonkid.net/bbs/rss.php?bo_table=t1"
         public MainWindow()
         {
             InitializeComponent();
-            RSS();
+            RSSFeed rss = new RSSFeed("드래곤 키드", "https://dragonkid.net/bbs/rss.php?bo_table=t1");
+            foreach(RSSFeed.Feed i in rss.Feeds)
+            {
+                ListBoxItem inst = new ListBoxItem();
+                inst.Content = i.Title;
+                inst.Tag = i;
+                List.Items.Add(inst);
+            }
+        }
+
+        private void List_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Browser.NavigateToString(RSSFeed.GetFeedFromListBoxItem(List.SelectedItem).Contents);
+        }
+
+        private void List_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {//
+            Process.Start(new ProcessStartInfo(RSSFeed.GetFeedFromListBoxItem(List.SelectedItem).URI) { UseShellExecute=true });
         }
     }
 }
