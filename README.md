@@ -1,7 +1,7 @@
 # RSS
 
-[![Publish]][MileStone]
+[![PUB]][MM]
 
 
 
-[MileStone]:https://github.com/Zeliper/RSS/milestone/1
+[MM]:https://github.com/Zeliper/RSS/milestone/1
