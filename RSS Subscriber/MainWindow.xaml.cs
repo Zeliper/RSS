@@ -28,6 +28,7 @@ namespace RSS_Subscriber
     /// </summary>
     public partial class MainWindow : Window
     {//"https://dragonkid.net/bbs/rss.php?bo_table=t1"
+
         public MainWindow()
         {
             InitializeComponent();
